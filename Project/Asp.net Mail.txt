@@ -1,0 +1,23 @@
+1) Gmail settings -> Forwarding and POP/IMAP - >Enable IMAP
+2)  https://myaccount.google.com/u/0/lesssecureapps -> enable 
+
+
+
+string fromaddr = "YOURMAILID@gmail.com";
+string toaddr = TextBox1.Text;//TO ADDRESS HERE
+string password = "YOUR PASSWROD";
+
+MailMessage msg = new MailMessage();
+msg.Subject = "Username &password";
+msg.From = new MailAddress(fromaddr);
+msg.Body = "Message BODY";
+msg.To.Add(new MailAddress(TextBox1.Text));
+SmtpClient smtp = new SmtpClient();
+smtp.Host = "smtp.gmail.com";
+smtp.Port = 587;
+smtp.UseDefaultCredentials = false;
+smtp.EnableSsl = true;
+NetworkCredential nc = new NetworkCredential(fromaddr,password);
+smtp.Credentials = nc;
+smtp.Send(msg);
+
